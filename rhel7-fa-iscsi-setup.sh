@@ -28,7 +28,6 @@ EOF
 # install pre-reqs
 ##################
 #yum --disablerepo=kubernetes install iscsi-initiator-utils device-mapper device-mapper-multipath -y
-yum-config-manager --disable kubernetes
 yum install iscsi-initiator-utils device-mapper device-mapper-multipath -y
 
 ##################
