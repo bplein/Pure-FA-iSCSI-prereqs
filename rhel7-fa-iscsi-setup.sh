@@ -28,7 +28,7 @@ EOF
 # install pre-reqs
 ##################
 
-yum install iscsi-initiator-utils device-mapper device-mapper-multipath -y
+dnf install iscsi-initiator-utils device-mapper device-mapper-multipath -y
 
 ##################
 # create multipath.conf
