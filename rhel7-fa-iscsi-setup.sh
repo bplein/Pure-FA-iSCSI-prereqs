@@ -36,24 +36,39 @@ dnf install iscsi-initiator-utils device-mapper device-mapper-multipath -y
 ##################
 
 cat << EOF > /etc/multipath.conf
- defaults {
-         polling_interval       10
+defaults {
+        polling_interval       10
 }
 
 devices {
-        device {
-               vendor                   "PURE"
-               product                  "FlashArray"
-               hardware_handler         "1 alua"
-               path_selector            "queue-length 0"
-               path_grouping_policy     group_by_prio
-               prio                     alua
-               path_checker             tur
-               fast_io_fail_tmo         10
-               failback                 immediate
-               no_path_retry            0
-               dev_loss_tmo             600
-               }
+    device {
+        vendor                      "NVME"
+        product                     "Pure Storage FlashArray"
+        path_selector               "queue-length 0"
+        path_grouping_policy        group_by_prio
+        prio                        ana
+        failback                    immediate
+        fast_io_fail_tmo            10
+        user_friendly_names         no
+        no_path_retry               0
+        features                    0
+        dev_loss_tmo                60
+    }
+    device {
+        vendor                   "PURE"
+        product                  "FlashArray"
+        path_selector            "service-time 0"
+        hardware_handler         "1 alua"
+        path_grouping_policy     group_by_prio
+        prio                     alua
+        failback                 immediate
+        path_checker             tur
+        fast_io_fail_tmo         10
+        user_friendly_names      no
+        no_path_retry            0
+        features                 0
+        dev_loss_tmo             600
+    }
 }
 EOF
 ##################
