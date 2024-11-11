@@ -79,7 +79,9 @@ dnf install iscsi-initiator-utils device-mapper device-mapper-multipath -y
 
 cat << EOF > /etc/multipath.conf
 defaults {
-        polling_interval       10
+	user_friendly_names no
+	enable_foreign "^$"
+        polling_interval    10
 }
 
 devices {
@@ -95,6 +97,7 @@ devices {
         no_path_retry               0
         features                    0
         dev_loss_tmo                60
+        find_multipaths             yes
     }
     device {
         vendor                   "PURE"
@@ -110,7 +113,21 @@ devices {
         no_path_retry            0
         features                 0
         dev_loss_tmo             600
+        find_multipaths          yes
     }
+}
+
+blacklist_exceptions {
+        property "(SCSI_IDENT_|ID_WWN)"
+}
+
+blacklist {
+      devnode "^pxd[0-9]*"
+      devnode "^pxd*"
+      device {
+        vendor "VMware"
+        product "Virtual disk"
+      }
 }
 
 EOF
