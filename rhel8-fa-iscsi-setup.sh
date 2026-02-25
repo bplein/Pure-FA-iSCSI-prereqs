@@ -94,9 +94,8 @@ EOF
 modprobe -v dm-multipath
 systemctl start multipathd.service
 ##################
-# Apply the rules by reloading the UDEV rules and then triggering Linux to apply them immediately.
-/sbin/udevadm control –-reload-rules
-/sbin/udevadm trigger –-type=devices --action=change 
+# Apply the rules by reloading the UDEV rules
+/sbin/udevadm control –-reload
 ##################
 # enable and start iscsid service
 systemctl enable iscsid
