@@ -95,7 +95,7 @@ modprobe -v dm-multipath
 systemctl start multipathd.service
 ##################
 # Apply the rules by reloading the UDEV rules
-/sbin/udevadm control –-reload
+/sbin/udevadm control –R
 ##################
 # enable and start iscsid service
 systemctl enable iscsid
